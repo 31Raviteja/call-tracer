@@ -46,3 +46,23 @@ class CallHistory(BaseModel):
     durations_sec: CallSummary = Field(
         default_factory=CallSummary
     )
+
+    class CallSearchResult(BaseModel):
+    call_id: str
+    uuid: str
+    timestamp: datetime
+    caller_number: str | None = None
+    destination_number: str | None = None
+    direction: str | None = None
+    tenant: str | None = None
+
+
+class CallSearchResponse(BaseModel):
+    page: int
+    page_size: int
+    total: int
+    results: list[CallSearchResult]
+
+
+class CallCountResponse(BaseModel):
+    count: int
